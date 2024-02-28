@@ -33,5 +33,11 @@ namespace TrackerLibrary
         /// represent the set of matches and rounds that will take place in the tournament
         /// </summary>
         public List<List<MatchupModel>> Rounds { get; set; } = new List<List<MatchupModel>>();
+
+
+        public TournamentModel()
+        {
+            Console.WriteLine("making sure i commit");
+        }
     }
 }
