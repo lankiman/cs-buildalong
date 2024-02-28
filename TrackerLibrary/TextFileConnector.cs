@@ -6,17 +6,12 @@ using System.Threading.Tasks;
 
 namespace TrackerLibrary
 {
-    internal class SqlConnector : IDataConnection
+    internal class TextFileConnector : IDataConnection
     {
-        /// <summary>
-        /// Save a new price to the Database
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        //TODO wire up the connection for the tet file
         public PrizeModel CreatePrize(PrizeModel model)
         {
             model.Id = 1;
-
             return model;
         }
     }

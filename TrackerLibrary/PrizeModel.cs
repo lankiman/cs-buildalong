@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace TrackerLibrary
 {
-    internal class PrizeModel
+    public class PrizeModel
     {
+        /// <summary>
+        /// represents identifier for the price
+        /// </summary>
+
+        public int Id { get; set; }
+
+
         /// <summary>
         /// represents the number of
         /// place or position a team got
