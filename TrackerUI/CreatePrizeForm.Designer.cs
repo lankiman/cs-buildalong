@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreatePrizeForm));
             headerLabel = new Label();
             placeNumberValue = new TextBox();
@@ -40,6 +41,12 @@
             prizePercentageLabel = new Label();
             orLabel = new Label();
             createPrizeButton = new Button();
+            PlaceNumberErrorProvider = new ErrorProvider(components);
+            prizeModelBindingSource = new BindingSource(components);
+            PlaceNameErrorProvider = new ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)PlaceNumberErrorProvider).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)prizeModelBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)PlaceNameErrorProvider).BeginInit();
             SuspendLayout();
             // 
             // headerLabel
@@ -147,6 +154,21 @@
             createPrizeButton.TabIndex = 28;
             createPrizeButton.Text = "Create Prize";
             createPrizeButton.UseVisualStyleBackColor = true;
+            createPrizeButton.Click += createPrizeButton_Click;
+            // 
+            // PlaceNumberErrorProvider
+            // 
+            PlaceNumberErrorProvider.ContainerControl = this;
+            PlaceNumberErrorProvider.DataSource = prizeModelBindingSource;
+            // 
+            // prizeModelBindingSource
+            // 
+            prizeModelBindingSource.DataSource = typeof(TrackerLibrary.PrizeModel);
+            // 
+            // PlaceNameErrorProvider
+            // 
+            PlaceNameErrorProvider.ContainerControl = this;
+            PlaceNameErrorProvider.DataSource = prizeModelBindingSource;
             // 
             // CreatePrizeForm
             // 
@@ -172,6 +194,9 @@
             Name = "CreatePrizeForm";
             Text = "Create Prize";
             Load += CreatePrizeForm_Load;
+            ((System.ComponentModel.ISupportInitialize)PlaceNumberErrorProvider).EndInit();
+            ((System.ComponentModel.ISupportInitialize)prizeModelBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)PlaceNameErrorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -189,5 +214,8 @@
         private Label prizePercentageLabel;
         private Label orLabel;
         private Button createPrizeButton;
+        private ErrorProvider PlaceNumberErrorProvider;
+        private BindingSource prizeModelBindingSource;
+        private ErrorProvider PlaceNameErrorProvider;
     }
 }

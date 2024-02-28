@@ -20,5 +20,36 @@ namespace TrackerUI
         private void CreatePrizeForm_Load(object sender, EventArgs e)
         {
         }
+
+        private void createPrizeButton_Click(object sender, EventArgs e)
+        {
+            validateForm();
+        }
+
+        private bool validateForm()
+        {
+            bool output = true;
+
+            int placeNumber = 0;
+
+            PlaceNumberErrorProvider.SetError(placeNumberValue, String.Empty);
+            PlaceNameErrorProvider.SetError(placeNameValue, String.Empty);
+
+            if (!int.TryParse(placeNumberValue.Text, out placeNumber))
+            {
+                PlaceNumberErrorProvider.SetError(placeNumberValue, "invalid Place Number Provided");
+
+                output = false;
+            }
+
+            if (placeNameValue.Text.Length == 0)
+            {
+                PlaceNameErrorProvider.SetError(placeNameValue, "Place Name should not be Empty");
+                output = false;
+            }
+
+
+            return output;
+        }
     }
 }
