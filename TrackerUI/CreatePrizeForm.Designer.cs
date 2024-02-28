@@ -44,9 +44,11 @@
             PlaceNumberErrorProvider = new ErrorProvider(components);
             prizeModelBindingSource = new BindingSource(components);
             PlaceNameErrorProvider = new ErrorProvider(components);
+            PrizeAmountErrorProvider = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)PlaceNumberErrorProvider).BeginInit();
             ((System.ComponentModel.ISupportInitialize)prizeModelBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PlaceNameErrorProvider).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)PrizeAmountErrorProvider).BeginInit();
             SuspendLayout();
             // 
             // headerLabel
@@ -170,6 +172,11 @@
             PlaceNameErrorProvider.ContainerControl = this;
             PlaceNameErrorProvider.DataSource = prizeModelBindingSource;
             // 
+            // PrizeAmountErrorProvider
+            // 
+            PrizeAmountErrorProvider.ContainerControl = this;
+            PrizeAmountErrorProvider.DataSource = prizeModelBindingSource;
+            // 
             // CreatePrizeForm
             // 
             AutoScaleDimensions = new SizeF(15F, 37F);
@@ -197,6 +204,7 @@
             ((System.ComponentModel.ISupportInitialize)PlaceNumberErrorProvider).EndInit();
             ((System.ComponentModel.ISupportInitialize)prizeModelBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)PlaceNameErrorProvider).EndInit();
+            ((System.ComponentModel.ISupportInitialize)PrizeAmountErrorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -217,5 +225,6 @@
         private ErrorProvider PlaceNumberErrorProvider;
         private BindingSource prizeModelBindingSource;
         private ErrorProvider PlaceNameErrorProvider;
+        private ErrorProvider PrizeAmountErrorProvider;
     }
 }

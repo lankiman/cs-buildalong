@@ -32,8 +32,11 @@ namespace TrackerUI
 
             int placeNumber = 0;
 
+            decimal prizeAmount = 0;
+
             PlaceNumberErrorProvider.SetError(placeNumberValue, String.Empty);
             PlaceNameErrorProvider.SetError(placeNameValue, String.Empty);
+            PrizeAmountErrorProvider.SetError(prizeAmountValue, String.Empty);
 
             if (!int.TryParse(placeNumberValue.Text, out placeNumber))
             {
@@ -45,6 +48,12 @@ namespace TrackerUI
             if (placeNameValue.Text.Length == 0)
             {
                 PlaceNameErrorProvider.SetError(placeNameValue, "Place Name should not be Empty");
+                output = false;
+            }
+
+            if (!decimal.TryParse(prizeAmountValue.Text, out prizeAmount))
+            {
+                PrizeAmountErrorProvider.SetError(prizeAmountValue, "Empty or Invalid Prize Amount");
                 output = false;
             }
 
