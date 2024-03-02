@@ -35,8 +35,18 @@ namespace TrackerUI
             decimal prizeAmount = 0;
 
             PlaceNumberErrorProvider.SetError(placeNumberValue, String.Empty);
-            PlaceNameErrorProvider.SetError(placeNameValue, String.Empty);
             PrizeAmountErrorProvider.SetError(prizeAmountValue, String.Empty);
+            PlaceNameErrorProvider.SetError(placeNameValue, String.Empty);
+
+
+            placeNumberValue.TextChanged +=
+                (sender, e) => TxtChanged(sender, e, placeNumberValue, PlaceNumberErrorProvider);
+
+            void TxtChanged(object sender, EventArgs e, TextBox value, ErrorProvider error)
+            {
+                error.SetError(value, String.Empty);
+            }
+
 
             if (!int.TryParse(placeNumberValue.Text, out placeNumber))
             {
@@ -59,6 +69,11 @@ namespace TrackerUI
 
 
             return output;
+        }
+
+        private void PlaceNumberLabel_TextChanged(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }
