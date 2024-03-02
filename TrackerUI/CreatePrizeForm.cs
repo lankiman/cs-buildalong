@@ -42,6 +42,12 @@ namespace TrackerUI
             placeNumberValue.TextChanged +=
                 (sender, e) => TxtChanged(sender, e, placeNumberValue, PlaceNumberErrorProvider);
 
+            placeNameValue.TextChanged +=
+                (sender, e) => TxtChanged(sender, e, placeNameValue, PlaceNameErrorProvider);
+
+            prizeAmountValue.TextChanged +=
+                (sender, e) => TxtChanged(sender, e, prizeAmountValue, PrizeAmountErrorProvider);
+
             void TxtChanged(object sender, EventArgs e, TextBox value, ErrorProvider error)
             {
                 error.SetError(value, String.Empty);
