@@ -45,10 +45,12 @@
             prizeModelBindingSource = new BindingSource(components);
             PlaceNameErrorProvider = new ErrorProvider(components);
             PrizeAmountErrorProvider = new ErrorProvider(components);
+            PrizePercentageErrorProvider = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)PlaceNumberErrorProvider).BeginInit();
             ((System.ComponentModel.ISupportInitialize)prizeModelBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PlaceNameErrorProvider).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PrizeAmountErrorProvider).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)PrizePercentageErrorProvider).BeginInit();
             SuspendLayout();
             // 
             // headerLabel
@@ -177,6 +179,11 @@
             PrizeAmountErrorProvider.ContainerControl = this;
             PrizeAmountErrorProvider.DataSource = prizeModelBindingSource;
             // 
+            // PrizePercentageErrorProvider
+            // 
+            PrizePercentageErrorProvider.ContainerControl = this;
+            PrizePercentageErrorProvider.DataSource = prizeModelBindingSource;
+            // 
             // CreatePrizeForm
             // 
             AutoScaleDimensions = new SizeF(15F, 37F);
@@ -205,6 +212,7 @@
             ((System.ComponentModel.ISupportInitialize)prizeModelBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)PlaceNameErrorProvider).EndInit();
             ((System.ComponentModel.ISupportInitialize)PrizeAmountErrorProvider).EndInit();
+            ((System.ComponentModel.ISupportInitialize)PrizePercentageErrorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -226,5 +234,6 @@
         private BindingSource prizeModelBindingSource;
         private ErrorProvider PlaceNameErrorProvider;
         private ErrorProvider PrizeAmountErrorProvider;
+        private ErrorProvider PrizePercentageErrorProvider;
     }
 }

@@ -34,9 +34,16 @@ namespace TrackerUI
 
             decimal prizeAmount = 0;
 
+            int pricePercentage = 0;
+
+            bool pricePercentageValid = int.TryParse(prizePercentageValue.Text, out pricePercentage);
+
+            bool prizeAmountValid = decimal.TryParse(prizeAmountValue.Text, out prizeAmount);
+
             PlaceNumberErrorProvider.SetError(placeNumberValue, String.Empty);
             PrizeAmountErrorProvider.SetError(prizeAmountValue, String.Empty);
             PlaceNameErrorProvider.SetError(placeNameValue, String.Empty);
+            PrizePercentageErrorProvider.SetError(prizePercentageValue, String.Empty);
 
 
             placeNumberValue.TextChanged +=
@@ -67,19 +74,24 @@ namespace TrackerUI
                 output = false;
             }
 
-            if (!decimal.TryParse(prizeAmountValue.Text, out prizeAmount))
+
+            if (!prizeAmountValid || !pricePercentageValid)
             {
-                PrizeAmountErrorProvider.SetError(prizeAmountValue, "Empty or Invalid Prize Amount");
                 output = false;
             }
 
 
-            return output;
-        }
+            if (prizeAmount < 1 && pricePercentage < 1)
+            {
+                output = false;
+            }
 
-        private void PlaceNumberLabel_TextChanged(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
+            if (pricePercentage < 0 || pricePercentage > 100)
+            {
+                output = false;
+            }
+
+            return output;
         }
     }
 }

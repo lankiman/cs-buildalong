@@ -4641,4 +4641,7 @@
   <metadata name="PrizeAmountErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>239, 58</value>
   </metadata>
+  <metadata name="PrizePercentageErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>471, 58</value>
+  </metadata>
 </root>
