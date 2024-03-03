@@ -54,7 +54,7 @@ namespace TrackerUI
             }
 
 
-            if (!int.TryParse(placeNumberValue.Text, out placeNumber))
+            if (!int.TryParse(placeNumberValue.Text, out placeNumber) || placeNumber < 1)
             {
                 PlaceNumberErrorProvider.SetError(placeNumberValue, "invalid Place Number Provided");
 
