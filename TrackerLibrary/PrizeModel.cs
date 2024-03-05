@@ -37,5 +37,20 @@ namespace TrackerLibrary
         /// represents the prizePercentage to be won
         /// </summary>
         public double PrizePercentage { get; set; }
+
+        public PrizeModel()
+        {
+        }
+
+        public PrizeModel(string placeName, string placeNumber, string prizeAmount, string prizePercentage)
+        {
+            PlaceName = placeName;
+
+            PlaceNumber = Convert.ToInt32(placeNumber);
+
+            PrizeAmount = Convert.ToDecimal(prizeAmount);
+
+            PrizePercentage = Convert.ToDouble(prizePercentage);
+        }
     }
 }

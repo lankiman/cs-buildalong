@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using TrackerLibrary;
 
 namespace TrackerUI
 {
@@ -23,7 +15,29 @@ namespace TrackerUI
 
         private void createPrizeButton_Click(object sender, EventArgs e)
         {
-            validateForm();
+            if (validateForm())
+            {
+                var model = new PrizeModel(
+                    placeNameValue.Text,
+                    placeNumberValue.Text,
+                    prizeAmountValue.Text,
+                    prizePercentageValue.Text);
+
+
+                foreach (var db in GlobalConfig.Connections)
+                {
+                    db.CreatePrize(model);
+                }
+
+                placeNameValue.Text = "";
+                placeNumberValue.Text = "";
+                prizeAmountValue.Text = "0";
+                prizePercentageValue.Text = "0";
+            }
+            else
+            {
+                MessageBox.Show("This form has invalid information please check all the error and try again");
+            }
         }
 
         private bool validateForm()
