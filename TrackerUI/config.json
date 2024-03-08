@@ -1,7 +1,9 @@
 {
   "ConnectionStrings": {
-    "Tournaments": "Server=localhost\\SQLEXPRESS;Database=Tournaments;Trusted_Connection=True",
-    "ProviderName": "System.Data.SqlClient"
-
+    "ProviderName": "System.Data.SqlClient",
+    "Tournaments": "Server=localhost\\SQLEXPRESS;Database=Tournaments;Trusted_Connection=True"
+  }
+  "FilePath": {
+    "TextFiles": "TournamentTracker\\TextFiles"
   }
 }

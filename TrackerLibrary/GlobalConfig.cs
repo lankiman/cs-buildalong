@@ -6,6 +6,14 @@ namespace TrackerLibrary
     public static class GlobalConfig
     {
         public static IDataConnection Connection { get; private set; }
+        public static IConfigurationRoot configuration;
+
+        static GlobalConfig()
+        {
+            configuration = new ConfigurationBuilder()
+                .AddJsonFile("config.json")
+                .Build();
+        }
 
         public static void InitializeConnections(DatabaseType db)
         {
@@ -26,10 +34,6 @@ namespace TrackerLibrary
 
         public static string ConnectionString(string name)
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .AddJsonFile("config.json")
-                .Build();
-
             return configuration.GetConnectionString(name);
         }
     }
