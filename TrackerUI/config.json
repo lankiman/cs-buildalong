@@ -1,0 +1,7 @@
+{
+  "ConnectionStrings": {
+    "Tournaments": "Server=localhost\\SQLEXPRESS;Database=Tournaments;Trusted_Connection=True",
+    "ProviderName": "System.Data.SqlClient"
+
+  }
+}

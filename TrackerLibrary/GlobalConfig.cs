@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Configuration;
+
 
 namespace TrackerLibrary
 {
@@ -27,6 +23,15 @@ namespace TrackerLibrary
                 var text = new TextFileConnector();
                 Connections.Add(text);
             }
+        }
+
+        public static string ConnectionString(string name)
+        {
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .AddJsonFile("config.json")
+                .Build();
+
+            return configuration.GetConnectionString(name);
         }
     }
 }

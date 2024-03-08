@@ -2,7 +2,7 @@ using System.Runtime.InteropServices.Marshalling;
 
 namespace TrackerUI
 {
-    internal static class Program
+    public static class Program
     {
         /// <summary>
         ///  The main entry point for the application.
