@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Net.Http.Headers;
-
-namespace TrackerLibrary
+﻿namespace TrackerLibrary
 {
     public static class TextConnectorProcessor
     {
@@ -35,6 +32,20 @@ namespace TrackerLibrary
                 p.PrizePercentage = double.Parse(cols[4]);
                 output.Add(p);
             }
+
+            return output;
+        }
+
+        public static void SaveToPrizeFile(this List<PrizeModel> models, string fileName)
+        {
+            List<string> lines = new List<string>();
+
+            foreach (PrizeModel p in models)
+            {
+                lines.Add($"{p.Id}, {p.PlaceNumber}, {p.PlaceName}, {p.PrizeAmount}, {p.PrizePercentage}");
+            }
+
+            File.WriteAllLines(fileName.FullFilePath(), lines);
         }
     }
 }
