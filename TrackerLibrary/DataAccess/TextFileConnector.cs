@@ -5,8 +5,6 @@ namespace TrackerLibrary
 {
     public class TextFileConnector : IDataConnection
     {
-        //TODO wire up the connection for the tet file
-
         private const string PrizesFile = "PrizeModels.csv";
 
         public PrizeModel CreatePrize(PrizeModel model)
@@ -24,6 +22,11 @@ namespace TrackerLibrary
 
             prizes.SaveToPrizeFile(PrizesFile);
             return model;
+        }
+
+        public PersonModel CreatePerson(PersonModel model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

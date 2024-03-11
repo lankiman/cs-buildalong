@@ -36,6 +36,7 @@
             teamNameLabel = new Label();
             headerLabel = new Label();
             memberGroupBox = new GroupBox();
+            createMemberButton = new Button();
             cellPhoneValue = new TextBox();
             cellPhoneLabel = new Label();
             emailValue = new TextBox();
@@ -44,7 +45,6 @@
             lastNameLabel = new Label();
             firstNameValue = new TextBox();
             firstNameLabel = new Label();
-            createMemberButton = new Button();
             teamMembersListBox = new ListBox();
             deleteSelectedMemberButton = new Button();
             createTeamButton = new Button();
@@ -128,6 +128,21 @@
             memberGroupBox.TabStop = false;
             memberGroupBox.Text = "Add New Member";
             // 
+            // createMemberButton
+            // 
+            createMemberButton.FlatAppearance.BorderColor = Color.Silver;
+            createMemberButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(102, 102, 102);
+            createMemberButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(242, 242, 242);
+            createMemberButton.FlatStyle = FlatStyle.Flat;
+            createMemberButton.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            createMemberButton.Location = new Point(75, 247);
+            createMemberButton.Name = "createMemberButton";
+            createMemberButton.Size = new Size(199, 41);
+            createMemberButton.TabIndex = 24;
+            createMemberButton.Text = "Create Member";
+            createMemberButton.UseVisualStyleBackColor = true;
+            createMemberButton.Click += createMemberButton_Click;
+            // 
             // cellPhoneValue
             // 
             cellPhoneValue.BorderStyle = BorderStyle.FixedSingle;
@@ -200,20 +215,6 @@
             firstNameLabel.Size = new Size(129, 32);
             firstNameLabel.TabIndex = 9;
             firstNameLabel.Text = "First Name";
-            // 
-            // createMemberButton
-            // 
-            createMemberButton.FlatAppearance.BorderColor = Color.Silver;
-            createMemberButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(102, 102, 102);
-            createMemberButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(242, 242, 242);
-            createMemberButton.FlatStyle = FlatStyle.Flat;
-            createMemberButton.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            createMemberButton.Location = new Point(75, 247);
-            createMemberButton.Name = "createMemberButton";
-            createMemberButton.Size = new Size(199, 41);
-            createMemberButton.TabIndex = 24;
-            createMemberButton.Text = "Create Member";
-            createMemberButton.UseVisualStyleBackColor = true;
             // 
             // teamMembersListBox
             // 

@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace TrackerLibrary
 {
-    internal class PersonModel
+    public class PersonModel
     {
+        public int Id { get; set; }
+
         /// <summary>
         /// represents first name of the person
         /// </summary>
