@@ -50,7 +50,7 @@ namespace TrackerLibrary
                 parameters.Add("@FirstName", model.FirstName);
                 parameters.Add("@LastName", model.LastName);
                 parameters.Add("@EmailAddress", model.EmailAddress);
-                parameters.Add("@PrizePercentage", model.CellphoneNumber);
+                parameters.Add("@CellphoneNumber", model.CellphoneNumber);
                 parameters.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
 
                 connection.Execute("dbo.spPeople_Insert", parameters, commandType: CommandType.StoredProcedure);
