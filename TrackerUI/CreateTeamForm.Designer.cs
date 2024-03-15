@@ -204,7 +204,7 @@
             firstNameValue.Name = "firstNameValue";
             firstNameValue.Size = new Size(224, 43);
             firstNameValue.TabIndex = 10;
-            firstNameValue.TextChanged += textBox1_TextChanged;
+            // firstNameValue.TextChanged += textBox1_TextChanged;
             // 
             // firstNameLabel
             // 
