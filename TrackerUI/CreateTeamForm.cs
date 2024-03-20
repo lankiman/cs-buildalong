@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TrackerLibrary;
+﻿using TrackerLibrary;
 
 namespace TrackerUI
 {
@@ -16,6 +7,33 @@ namespace TrackerUI
         public CreateTeamForm()
         {
             InitializeComponent();
+
+            // CreateSampleData();
+
+            WireUPLists();
+        }
+
+        private List<PersonModel> avaliableTeamMembers = GlobalConfig.Connection.GetPerson_All();
+        private List<PersonModel> selectedTeamMembers = new List<PersonModel>();
+
+        private void WireUPLists()
+        {
+            selectTeamMemberDropDown.DataSource = avaliableTeamMembers;
+
+            selectTeamMemberDropDown.DisplayMember = "FullName";
+
+            teamMembersListBox.DataSource = selectedTeamMembers;
+
+            teamMembersListBox.DisplayMember = "FullName";
+        }
+
+        private void CreateSampleData()
+        {
+            avaliableTeamMembers.Add(new PersonModel() { FirstName = "marve", LastName = "lannki" });
+            avaliableTeamMembers.Add(new PersonModel() { FirstName = "maasdfve", LastName = "lannki" });
+
+            selectedTeamMembers.Add(new PersonModel() { FirstName = "Try", LastName = "Gooed" });
+            selectedTeamMembers.Add(new PersonModel() { FirstName = "Try", LastName = "Gooed" });
         }
 
 

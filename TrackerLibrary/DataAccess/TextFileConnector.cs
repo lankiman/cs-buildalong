@@ -41,5 +41,10 @@ namespace TrackerLibrary
             people.SaveToPeopleFile(PeopleFile);
             return model;
         }
+
+        public List<PersonModel> GetPerson_All()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
