@@ -1,4 +1,5 @@
-﻿using TrackerLibrary;
+﻿using System;
+using TrackerLibrary;
 
 namespace TrackerUI
 {
@@ -18,10 +19,12 @@ namespace TrackerUI
 
         private void WireUPLists()
         {
+            selectTeamMemberDropDown.DataSource = null;
             selectTeamMemberDropDown.DataSource = avaliableTeamMembers;
 
             selectTeamMemberDropDown.DisplayMember = "FullName";
 
+            teamMembersListBox.DataSource = null;
             teamMembersListBox.DataSource = selectedTeamMembers;
 
             teamMembersListBox.DisplayMember = "FullName";
@@ -47,7 +50,10 @@ namespace TrackerUI
                 p.EmailAddress = emailValue.Text;
                 p.CellphoneNumber = cellPhoneValue.Text;
 
-                GlobalConfig.Connection.CreatePerson(p);
+                p = GlobalConfig.Connection.CreatePerson(p);
+
+                selectedTeamMembers.Add(p);
+                WireUPLists();
 
                 firstNameValue.Text = "";
                 lastNameValue.Text = "";
@@ -83,6 +89,32 @@ namespace TrackerUI
             }
 
             return true;
+        }
+
+        private void addMemberButton_Click(object sender, EventArgs e)
+        {
+            PersonModel person = (PersonModel)selectTeamMemberDropDown.SelectedItem;
+            if (person != null)
+            {
+                avaliableTeamMembers.Remove(person);
+                selectedTeamMembers.Add(person);
+                WireUPLists();
+            }
+        }
+
+        private void removeSelectedMemberButton_Click(object sender, EventArgs e)
+        {
+            PersonModel person = (PersonModel)teamMembersListBox.SelectedItem;
+            if (person != null)
+            {
+                selectedTeamMembers.Remove(person);
+                avaliableTeamMembers.Add(person);
+                WireUPLists();
+            }
+            else
+            {
+                MessageBox.Show("Please Select a Team Member to Remove");
+            }
         }
     }
 }

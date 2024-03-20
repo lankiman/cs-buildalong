@@ -8,7 +8,7 @@ namespace TrackerLibrary
     internal class SqlConnector : IDataConnection
 
     {
-        private IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString("Tournaments"));
+        private string db = "Tournaments";
 
         /// <summary>
         /// Save a new price to the Database
@@ -18,7 +18,7 @@ namespace TrackerLibrary
         ///
         public PrizeModel CreatePrize(PrizeModel model)
         {
-            using (connection)
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString(db)))
             {
                 //
                 // @PlaceNumber int,
@@ -44,7 +44,7 @@ namespace TrackerLibrary
 
         public PersonModel CreatePerson(PersonModel model)
         {
-            using (connection)
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString(db)))
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@FirstName", model.FirstName);
@@ -64,7 +64,7 @@ namespace TrackerLibrary
         public List<PersonModel> GetPerson_All()
         {
             List<PersonModel> output;
-            using (connection)
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString(db)))
             {
                 output = connection.Query<PersonModel>("dbo.spPeople_GetAll").ToList();
             }
