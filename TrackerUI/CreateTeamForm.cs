@@ -11,13 +11,13 @@ namespace TrackerUI
 
             // CreateSampleData();
 
-            WireUPLists();
+            WireUpLists();
         }
 
         private List<PersonModel> avaliableTeamMembers = GlobalConfig.Connection.GetPerson_All();
         private List<PersonModel> selectedTeamMembers = new List<PersonModel>();
 
-        private void WireUPLists()
+        private void WireUpLists()
         {
             selectTeamMemberDropDown.DataSource = null;
             selectTeamMemberDropDown.DataSource = avaliableTeamMembers;
@@ -53,7 +53,7 @@ namespace TrackerUI
                 p = GlobalConfig.Connection.CreatePerson(p);
 
                 selectedTeamMembers.Add(p);
-                WireUPLists();
+                WireUpLists();
 
                 firstNameValue.Text = "";
                 lastNameValue.Text = "";
@@ -98,7 +98,7 @@ namespace TrackerUI
             {
                 avaliableTeamMembers.Remove(person);
                 selectedTeamMembers.Add(person);
-                WireUPLists();
+                WireUpLists();
             }
         }
 
@@ -109,7 +109,7 @@ namespace TrackerUI
             {
                 selectedTeamMembers.Remove(person);
                 avaliableTeamMembers.Add(person);
-                WireUPLists();
+                WireUpLists();
             }
             else
             {
