@@ -6,17 +6,11 @@ using System.Threading.Tasks;
 
 namespace TrackerLibrary
 {
-    internal class TeamModel
+    public class TeamModel
     {
-        /// <summary>
-        /// represents name of the persons or team members
-        /// participating in the tournament
-        /// </summary>
-        public List<PersonModel> TeamMembers { get; set; } = new List<PersonModel>();
-
-        /// <summary>
-        /// represent the name of the teams participating in the tournament
-        /// </summary>
+        public int Id { get; set; }
         public string TeamName { get; set; }
+
+        public List<PersonModel> TeamMembers { get; set; } = new List<PersonModel>();
     }
 }

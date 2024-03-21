@@ -116,5 +116,16 @@ namespace TrackerUI
                 MessageBox.Show("Please Select a Team Member to Remove");
             }
         }
+
+        private void createTeamButton_Click(object sender, EventArgs e)
+        {
+            var Team = new TeamModel();
+            Team.TeamName = teamNameValue.Text;
+            Team.TeamMembers = selectedTeamMembers;
+
+            Team = GlobalConfig.Connection.CreateTeam(Team);
+
+            //TODO if we are not closing this form after creation, reset the form.
+        }
     }
 }
