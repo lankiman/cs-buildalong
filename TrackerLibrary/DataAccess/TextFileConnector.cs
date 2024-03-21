@@ -48,6 +48,11 @@ namespace TrackerLibrary
             return PeopleFile.FullFilePath().LoadFile().ConverToPersonModels();
         }
 
+        public List<TeamModel> GetTeam_All()
+        {
+            throw new NotImplementedException();
+        }
+
         public TeamModel CreateTeam(TeamModel model)
         {
             List<TeamModel> teams = TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);
