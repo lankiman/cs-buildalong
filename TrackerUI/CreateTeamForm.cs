@@ -5,11 +5,13 @@ namespace TrackerUI
 {
     public partial class CreateTeamForm : Form
     {
-        public CreateTeamForm()
+        private ITeamRequester callingForm;
+
+        public CreateTeamForm(ITeamRequester caller)
         {
             InitializeComponent();
 
-            // CreateSampleData();
+            callingForm = caller;
 
             WireUpLists();
         }
@@ -50,7 +52,7 @@ namespace TrackerUI
                 p.EmailAddress = emailValue.Text;
                 p.CellphoneNumber = cellPhoneValue.Text;
 
-                p = GlobalConfig.Connection.CreatePerson(p);
+                GlobalConfig.Connection.CreatePerson(p);
 
                 selectedTeamMembers.Add(p);
                 WireUpLists();
@@ -123,9 +125,11 @@ namespace TrackerUI
             Team.TeamName = teamNameValue.Text;
             Team.TeamMembers = selectedTeamMembers;
 
-            Team = GlobalConfig.Connection.CreateTeam(Team);
+            GlobalConfig.Connection.CreateTeam(Team);
 
-            //TODO if we are not closing this form after creation, reset the form.
+            callingForm.TeamComplete(Team);
+
+            this.Close();
         }
     }
 }

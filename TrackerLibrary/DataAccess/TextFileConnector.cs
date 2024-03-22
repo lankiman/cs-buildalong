@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 
 namespace TrackerLibrary
@@ -43,16 +44,6 @@ namespace TrackerLibrary
             return model;
         }
 
-        public List<PersonModel> GetPerson_All()
-        {
-            return PeopleFile.FullFilePath().LoadFile().ConverToPersonModels();
-        }
-
-        public List<TeamModel> GetTeam_All()
-        {
-            throw new NotImplementedException();
-        }
-
         public TeamModel CreateTeam(TeamModel model)
         {
             List<TeamModel> teams = TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);
@@ -68,6 +59,16 @@ namespace TrackerLibrary
 
             teams.SaveToTeamFile(TeamFile);
             return model;
+        }
+
+        public List<PersonModel> GetPerson_All()
+        {
+            return PeopleFile.FullFilePath().LoadFile().ConverToPersonModels();
+        }
+
+        public List<TeamModel> GetTeam_All()
+        {
+            return TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);
         }
     }
 }
