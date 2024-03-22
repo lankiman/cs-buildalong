@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace TrackerLibrary
 {
-    internal class MatchupModel
+    public class MatchupModel
     {
+        public int Id { get; set; }
+
         /// <summary>
         /// represents the teams Playing 
         /// </summary>

@@ -170,7 +170,7 @@ namespace TrackerLibrary
                     $@"{tournament.Id},{tournament.TournamentName},{tournament.EntryFee},
                     {ConvertTeamlistToString(tournament.EnteredTeams)},
                     {ConvertPrizeslistToString(tournament.Prizes)},
-                    {""}");
+                    {ConvertRoundlistToString(tournament.Rounds)}");
             }
 
             File.WriteAllLines(fileName.FullFilePath(), lines);
@@ -226,6 +226,44 @@ namespace TrackerLibrary
             foreach (TeamModel team in teams)
             {
                 output += $"{team.Id}|";
+            }
+
+            output = output.Substring(0, output.Length - 1);
+
+            return output;
+        }
+
+        private static string ConvertRoundlistToString(List<List<MatchupModel>> rounds)
+        {
+            string output = "";
+
+            if (rounds.Count == 0)
+            {
+                return "";
+            }
+
+            foreach (List<MatchupModel> matchup in rounds)
+            {
+                output += $"{ConvertMatchupListToString(matchup)}|";
+            }
+
+            output = output.Substring(0, output.Length - 1);
+
+            return output;
+        }
+
+        private static string ConvertMatchupListToString(List<MatchupModel> matchups)
+        {
+            string output = "";
+
+            if (matchups.Count == 0)
+            {
+                return "";
+            }
+
+            foreach (MatchupModel matchup in matchups)
+            {
+                output += $"{matchup.Id}^";
             }
 
             output = output.Substring(0, output.Length - 1);

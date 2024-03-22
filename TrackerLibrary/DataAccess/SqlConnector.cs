@@ -61,7 +61,7 @@ namespace TrackerLibrary
             return model;
         }
 
-        public TournamentModel CreateTournament(TournamentModel model)
+        public void CreateTournament(TournamentModel model)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString(db)))
             {
@@ -69,8 +69,6 @@ namespace TrackerLibrary
                 SaveTournamentPrizes(model, connection);
                 SaveTournamentEntries(model, connection);
             }
-
-            return model;
         }
 
         private void SaveTournament(TournamentModel model, IDbConnection connection)
