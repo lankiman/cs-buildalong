@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace TrackerLibrary
 {
-    internal class TournamentModel
+    public class TournamentModel
     {
+        public int Id { get; set; }
+
         /// <summary>
         /// represents the name or the type of tournament being played
         /// </summary>
@@ -34,11 +36,5 @@ namespace TrackerLibrary
         /// represent the set of matches and rounds that will take place in the tournament
         /// </summary>
         public List<List<MatchupModel>> Rounds { get; set; } = new List<List<MatchupModel>>();
-
-
-        public TournamentModel()
-        {
-            Console.WriteLine("making sure i commit");
-        }
     }
 }

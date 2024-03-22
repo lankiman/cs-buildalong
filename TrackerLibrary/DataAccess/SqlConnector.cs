@@ -61,6 +61,44 @@ namespace TrackerLibrary
             return model;
         }
 
+        public TournamentModel CreateTournament(TournamentModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString(db)))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@TournamentName", model.TournamentName);
+                parameters.Add("@EntryFee", model.EntryFee);
+
+                parameters.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                connection.Execute("dbo.spTournaments_Insert", parameters, commandType: CommandType.StoredProcedure);
+
+                model.Id = parameters.Get<int>("@id");
+
+                foreach (PrizeModel prize in model.Prizes)
+                {
+                    parameters = new DynamicParameters();
+                    parameters.Add("@TournamentId", model.Id);
+                    parameters.Add("@PrizeId", prize.Id);
+
+                    connection.Execute("dbo.spTournamentPrizes_Insert", parameters,
+                        commandType: CommandType.StoredProcedure);
+                }
+
+                foreach (TeamModel team in model.EnteredTeams)
+                {
+                    parameters = new DynamicParameters();
+                    parameters.Add("@TournamentId", model.Id);
+                    parameters.Add("@TeamId", team.Id);
+
+                    connection.Execute("dbo.spTournamentEntries_Insert", parameters,
+                        commandType: CommandType.StoredProcedure);
+                }
+            }
+
+            return model;
+        }
+
         public List<PersonModel> GetPerson_All()
         {
             List<PersonModel> output;
