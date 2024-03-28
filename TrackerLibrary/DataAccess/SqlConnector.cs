@@ -111,6 +111,53 @@ namespace TrackerLibrary
             }
         }
 
+        private void SaveTournamentRounds(TournamentModel model, IDbConnection connection)
+        {
+            foreach (List<MatchupModel> round in model.Rounds)
+            {
+                foreach (MatchupModel matchup in round)
+                {
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@TournamentId", model.Id);
+                    parameters.Add("@MatchupRound", matchup.MatchupRound);
+                    parameters.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                    connection.Execute("dbo.spMatchups_Insert", parameters,
+                        commandType: CommandType.StoredProcedure);
+
+                    matchup.Id = parameters.Get<int>("@id");
+
+                    foreach (MatchupEntryModel entry in matchup.Entries)
+                    {
+                        parameters = new DynamicParameters();
+                        parameters.Add("@MatchupId", matchup.Id);
+                        if (entry.ParentMatchup == null)
+                        {
+                            parameters.Add("@ParentMatchupId", null);
+                        }
+                        else
+                        {
+                            parameters.Add("@ParentMatchupId", entry.ParentMatchup.Id);
+                        }
+
+                        if (entry.TeamCompeting == null)
+                        {
+                            parameters.Add("@TeamCompetingId", null);
+                        }
+                        else
+                        {
+                            parameters.Add("@TeamCompetingId", entry.TeamCompeting.Id);
+                        }
+
+                        parameters.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                        connection.Execute("dbo.spMatchupEntries_Insert", parameters,
+                            commandType: CommandType.StoredProcedure);
+                    }
+                }
+            }
+        }
+
         public List<PersonModel> GetPerson_All()
         {
             List<PersonModel> output;

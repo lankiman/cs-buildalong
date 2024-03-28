@@ -62,7 +62,8 @@ namespace TrackerLibrary
             return model;
         }
 
-        public void TournamentModel CreateTournament(TournamentModel model)
+
+        public void CreateTournament(TournamentModel model)
         {
             List<TournamentModel> tournaments =
                 TournamentFile.FullFilePath().LoadFile().ConvertToTournamentModels(TeamFile, PeopleFile, PrizesFile);
