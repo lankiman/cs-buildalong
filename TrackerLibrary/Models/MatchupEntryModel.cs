@@ -28,8 +28,8 @@ namespace TrackerLibrary
         /// initializes the object
         /// </summary>
         /// <param name="initialScore"></param>
-        public MatchupEntryModel(double initialScore)
-        {
-        }
+        // public MatchupEntryModel(double initialScore)
+        // {
+        // }
     }
 }

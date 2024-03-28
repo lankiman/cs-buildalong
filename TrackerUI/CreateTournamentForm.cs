@@ -125,14 +125,10 @@ namespace TrackerUI
             tournament.Prizes = selectedPrizes;
             tournament.EnteredTeams = selectedTeams;
 
-            //Create Tournament Entry
-            //Create all of the prizes entries 
-            //create all of the team entries
+
+            TournamentLogic.CreateRounds(tournament);
 
             GlobalConfig.Connection.CreateTournament(tournament);
-
-
-            //create our mathcups
         }
     }
 }

@@ -68,6 +68,7 @@ namespace TrackerLibrary
                 SaveTournament(model, connection);
                 SaveTournamentPrizes(model, connection);
                 SaveTournamentEntries(model, connection);
+                SaveTournamentRounds(model, connection);
             }
         }
 
