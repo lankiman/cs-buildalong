@@ -131,6 +131,7 @@ namespace TrackerLibrary
                     {
                         parameters = new DynamicParameters();
                         parameters.Add("@MatchupId", matchup.Id);
+
                         if (entry.ParentMatchup == null)
                         {
                             parameters.Add("@ParentMatchupId", null);
