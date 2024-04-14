@@ -1,5 +1,6 @@
 ﻿using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
+using NotImplementedException = System.NotImplementedException;
 
 namespace TrackerLibrary
 {
@@ -187,6 +188,88 @@ namespace TrackerLibrary
                 }
             }
         }
+
+        private static List<MatchupEntryModel> ConvertStringtoMatchupEntryModels(string input)
+        {
+            string[] ids = input.Split("|");
+
+            List<MatchupEntryModel> ouput = new List<MatchupEntryModel>();
+            List<MatchupEntryModel> entries =
+                GlobalConfig.MatchupEntryFile.FullFilePath().LoadFile().ConvertToMatchupEntryModels();
+
+            foreach (string id in ids)
+            {
+                ouput.Add(entries.Where(x => x.Id == int.Parse(id)).First());
+            }
+
+            throw new NotImplementedException();
+        }
+
+        private static TeamModel LookTeamById(int id)
+        {
+            List<TeamModel> teams = GlobalConfig.TeamFile.FullFilePath().LoadFile()
+                .ConvertToTeamModels(GlobalConfig.PeopleFile);
+
+            return teams.Where(x => x.Id == id).First();
+        }
+
+
+        private static MatchupModel LookMatchupById(int id)
+        {
+            List<MatchupModel> matchups = GlobalConfig.MatchupFile.FullFilePath().LoadFile().ConvertToMatchupModels();
+
+            return matchups.Where(x => x.Id == id).First();
+        }
+
+        public static List<MatchupModel> ConvertToMatchupModels(this List<string> lines)
+        {
+            List<MatchupModel> output = new List<MatchupModel>();
+
+            foreach (string line in lines)
+            {
+                string[] cols = line.Split(",");
+                var mathchup = new MatchupModel();
+                mathchup.Id = int.Parse(cols[0]);
+                mathchup.Entries = ConvertStringtoMatchupEntryModels(cols[1]);
+                mathchup.Winner = LookTeamById(int.Parse(cols[2]));
+                mathchup.MatchupRound = int.Parse(cols[3]);
+
+                output.Add(mathchup);
+            }
+
+            return output;
+        }
+
+        public static List<MatchupEntryModel> ConvertToMatchupEntryModels(this List<string> lines)
+        {
+            List<MatchupEntryModel> output = new List<MatchupEntryModel>();
+
+            foreach (string line in lines)
+            {
+                string[] cols = line.Split(",");
+                var m = new MatchupEntryModel();
+                m.Id = int.Parse(cols[0]);
+                m.TeamCompeting = LookTeamById(int.Parse(cols[1]));
+                m.Score = double.Parse(cols[2]);
+
+                int parentId = 0;
+
+                if (int.TryParse(cols[3], out parentId))
+                {
+                    m.ParentMatchup = LookMatchupById(int.Parse(cols[3]));
+                }
+                else
+                {
+                    m.ParentMatchup = null;
+                }
+
+
+                output.Add(m);
+            }
+
+            return output;
+        }
+
 
         public static void SaveMatchupToFile(this MatchupModel matchup, string matchupFile, string matchupEntryFile)
         {
