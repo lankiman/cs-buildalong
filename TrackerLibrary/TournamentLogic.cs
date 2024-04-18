@@ -80,7 +80,12 @@ namespace TrackerLibrary
         {
             int output = 0;
 
-            int totalTeams = rounds * 2;
+            int totalTeams = 1;
+
+            for (int i = 1; i <= rounds; i++)
+            {
+                totalTeams *= 2;
+            }
 
             output = totalTeams - numberOfTeams;
 
