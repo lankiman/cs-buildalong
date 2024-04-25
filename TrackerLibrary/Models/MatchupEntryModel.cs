@@ -12,6 +12,11 @@ namespace TrackerLibrary
         public int Id { get; set; }
 
         /// <summary>
+        /// The id To represent of find the Team competing in the matchup
+        /// </summary>
+        public int TeamCompetingId { get; set; }
+
+        /// <summary>
         /// Represents one team in the matchup
         /// </summary>
         public TeamModel TeamCompeting { get; set; }

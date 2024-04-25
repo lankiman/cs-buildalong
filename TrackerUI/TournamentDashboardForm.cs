@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrackerLibrary;
 
 namespace TrackerUI
 {
@@ -17,7 +18,9 @@ namespace TrackerUI
             InitializeComponent();
         }
 
-        private void selectTeamMemberLabel_Click(object sender, EventArgs e)
+        private List<TournamentModel> tournaments = GlobalConfig.Connection.GetTournament_All();
+
+        private void createTournamentButton_Click(object sender, EventArgs e)
         {
         }
     }

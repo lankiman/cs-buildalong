@@ -189,6 +189,60 @@ namespace TrackerLibrary
             return output;
         }
 
+        public List<TournamentModel> GetTournament_All()
+        {
+            List<TournamentModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString(db)))
+            {
+                output = connection.Query<TournamentModel>("dbo.spTournaments_GetAll").ToList();
+
+                foreach (TournamentModel tournament in output)
+                {
+                    //populate prices
+                    tournament.Prizes = connection.Query<PrizeModel>("dbo.spPrizes_GetByTournament").ToList();
+
+
+                    //populiate teams
+                    tournament.EnteredTeams = connection.Query<TeamModel>("dbo.spTeam_GetByTournament").ToList();
+
+                    foreach (TeamModel team in tournament.EnteredTeams)
+                    {
+                        var param = new DynamicParameters();
+                        param.Add("@TeamId", team.Id);
+                        team.TeamMembers = connection.Query<PersonModel>("dbo.spTeamMembers_GetByTeam", param,
+                            commandType: CommandType.StoredProcedure).ToList();
+                    }
+
+                    //populate Rounds
+
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@TournamentId", tournament.Id);
+                    List<MatchupModel> matchups = connection.Query<MatchupModel>("dbo.spMatchups_GetByTournament",
+                        parameters,
+                        commandType: CommandType.StoredProcedure).ToList();
+                    foreach (MatchupModel m in matchups)
+                    {
+                        var p = new DynamicParameters();
+                        p.Add("@MatchupId", m.Id);
+                        m.Entries = connection.Query<MatchupEntryModel>("dbo.spMatchupEntries_GetByMatchup",
+                            parameters,
+                            commandType: CommandType.StoredProcedure).ToList();
+
+                        foreach (MatchupEntryModel e in m.Entries)
+                        {
+                            if (e.TeamCompetingId > 0)
+                            {
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            return output;
+        }
+
+
         public TeamModel CreateTeam(TeamModel model)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString(db)))
