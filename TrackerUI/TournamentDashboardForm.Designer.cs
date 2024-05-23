@@ -62,7 +62,6 @@
             loadExistingTournamentLabel.Size = new Size(301, 35);
             loadExistingTournamentLabel.TabIndex = 22;
             loadExistingTournamentLabel.Text = "Load Existing Tournament";
-            loadExistingTournamentLabel.Click += selectTeamMemberLabel_Click;
             // 
             // loadTournamentButton
             // 
@@ -77,6 +76,7 @@
             loadTournamentButton.TabIndex = 29;
             loadTournamentButton.Text = "Load Tournament";
             loadTournamentButton.UseVisualStyleBackColor = true;
+            loadTournamentButton.Click += loadTournamentButton_Click;
             // 
             // createTournamentButton
             // 

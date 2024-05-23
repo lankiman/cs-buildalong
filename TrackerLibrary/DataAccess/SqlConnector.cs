@@ -199,11 +199,15 @@ namespace TrackerLibrary
                 foreach (TournamentModel tournament in output)
                 {
                     //populate prices
-                    tournament.Prizes = connection.Query<PrizeModel>("dbo.spPrizes_GetByTournament").ToList();
+                    var para = new DynamicParameters();
+                    para.Add("@TournamentId", tournament.Id);
+                    tournament.Prizes = connection.Query<PrizeModel>("dbo.spPrizes_GetByTournament", para,
+                        commandType: CommandType.StoredProcedure).ToList();
 
 
-                    //populiate teams
-                    tournament.EnteredTeams = connection.Query<TeamModel>("dbo.spTeam_GetByTournament").ToList();
+                    //populiate team
+                    tournament.EnteredTeams = connection.Query<TeamModel>("dbo.spTeam_GetByTournament", para,
+                        commandType: CommandType.StoredProcedure).ToList();
 
                     foreach (TeamModel team in tournament.EnteredTeams)
                     {
@@ -225,17 +229,47 @@ namespace TrackerLibrary
                         var p = new DynamicParameters();
                         p.Add("@MatchupId", m.Id);
                         m.Entries = connection.Query<MatchupEntryModel>("dbo.spMatchupEntries_GetByMatchup",
-                            parameters,
+                            p,
                             commandType: CommandType.StoredProcedure).ToList();
+                        List<TeamModel> allTeams = GetTeam_All();
+
+
+                        if (m.WinnerId > 0)
+                        {
+                            m.Winner = allTeams.Where(x => x.Id == m.WinnerId).First();
+                        }
 
                         foreach (MatchupEntryModel e in m.Entries)
                         {
                             if (e.TeamCompetingId > 0)
                             {
+                                e.TeamCompeting = allTeams.Where(x => x.Id == e.TeamCompetingId).First();
+                            }
 
+                            if (e.ParentMatchpuId > 0)
+                            {
+                                e.ParentMatchup = matchups.Where(x => x.Id == e.ParentMatchpuId).First();
                             }
                         }
                     }
+
+                    //list<list><mathupmodel>
+                    List<MatchupModel> currRow = new List<MatchupModel>();
+                    int currRound = 1;
+
+                    foreach (MatchupModel m in matchups)
+                    {
+                        if (m.MatchupRound > currRound)
+                        {
+                            tournament.Rounds.Add(currRow);
+                            currRow = new List<MatchupModel>();
+                            currRound += 1;
+                        }
+
+                        currRow.Add(m);
+                    }
+
+                    tournament.Rounds.Add(currRow);
                 }
             }
 

@@ -27,6 +27,11 @@ namespace TrackerLibrary
         public double Score { get; set; }
 
         /// <summary>
+        /// unique identifier for the parent matchup
+        /// </summary>
+        public int ParentMatchpuId { get; set; }
+
+        /// <summary>
         /// represents the matchup the team came from
         /// </summary>
         public MatchupModel ParentMatchup { get; set; }

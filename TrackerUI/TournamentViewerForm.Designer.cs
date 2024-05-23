@@ -37,7 +37,7 @@
             matchupListbox = new ListBox();
             teamOneName = new Label();
             teamOneScoreLabel = new Label();
-            textBox1 = new TextBox();
+            teamOneScoreValue = new TextBox();
             teamTwoScoreValue = new TextBox();
             teamTwoScoreLabel = new Label();
             teamTwoName = new Label();
@@ -54,7 +54,6 @@
             headerLabel.Size = new Size(226, 50);
             headerLabel.TabIndex = 0;
             headerLabel.Text = "Tournament:";
-            headerLabel.Click += label1_Click;
             // 
             // tournamentName
             // 
@@ -82,6 +81,7 @@
             roundDropdown.Name = "roundDropdown";
             roundDropdown.Size = new Size(231, 45);
             roundDropdown.TabIndex = 3;
+            roundDropdown.SelectedIndexChanged += roundDropdown_SelectedIndexChanged;
             // 
             // unplayedCheckbox
             // 
@@ -104,6 +104,7 @@
             matchupListbox.Name = "matchupListbox";
             matchupListbox.Size = new Size(324, 261);
             matchupListbox.TabIndex = 5;
+            matchupListbox.SelectedIndexChanged += matchupListbox_SelectedIndexChanged;
             // 
             // teamOneName
             // 
@@ -114,7 +115,6 @@
             teamOneName.Size = new Size(148, 32);
             teamOneName.TabIndex = 6;
             teamOneName.Text = "<team one>";
-            teamOneName.Click += teamOneName_Click;
             // 
             // teamOneScoreLabel
             // 
@@ -126,14 +126,13 @@
             teamOneScoreLabel.TabIndex = 7;
             teamOneScoreLabel.Text = "Score";
             // 
-            // textBox1
+            // teamOneScoreValue
             // 
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Location = new Point(445, 253);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(89, 43);
-            textBox1.TabIndex = 8;
-            textBox1.TextChanged += textBox1_TextChanged;
+            teamOneScoreValue.BorderStyle = BorderStyle.FixedSingle;
+            teamOneScoreValue.Location = new Point(445, 253);
+            teamOneScoreValue.Name = "teamOneScoreValue";
+            teamOneScoreValue.Size = new Size(89, 43);
+            teamOneScoreValue.TabIndex = 8;
             // 
             // teamTwoScoreValue
             // 
@@ -172,7 +171,6 @@
             versusLabel.Size = new Size(62, 32);
             versusLabel.TabIndex = 12;
             versusLabel.Text = "-VS-";
-            versusLabel.Click += label1_Click_1;
             // 
             // scoreButton
             // 
@@ -199,7 +197,7 @@
             Controls.Add(teamTwoScoreValue);
             Controls.Add(teamTwoScoreLabel);
             Controls.Add(teamTwoName);
-            Controls.Add(textBox1);
+            Controls.Add(teamOneScoreValue);
             Controls.Add(teamOneScoreLabel);
             Controls.Add(teamOneName);
             Controls.Add(matchupListbox);
@@ -214,7 +212,6 @@
             Margin = new Padding(6);
             Name = "TournamentViewerForm";
             Text = "Tournament Viewer";
-            Load += TournamentViewerForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -229,7 +226,7 @@
         private ListBox matchupListbox;
         private Label teamOneName;
         private Label teamOneScoreLabel;
-        private TextBox textBox1;
+        private TextBox teamOneScoreValue;
         private TextBox teamTwoScoreValue;
         private Label teamTwoScoreLabel;
         private Label teamTwoName;
