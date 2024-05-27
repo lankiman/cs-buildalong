@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using TrackerLibrary;
 
 namespace TrackerUI
@@ -6,9 +7,11 @@ namespace TrackerUI
     {
         private TournamentModel tournament;
 
-        List<int> rounds = new List<int>();
+        BindingList<int> rounds = new BindingList<int>();
 
-        private List<MatchupModel> selectedMatchups = new List<MatchupModel>();
+        BindingList<MatchupModel> selectedMatchups = new BindingList<MatchupModel>();
+
+        MatchupModel deterList;
 
         public TournamentViewerForm(TournamentModel tournamentModel)
         {
@@ -28,20 +31,20 @@ namespace TrackerUI
 
         private void WireUpRoundsLists()
         {
-            roundDropdown.DataSource = null;
             roundDropdown.DataSource = rounds;
         }
 
         private void WireUpMatchupsLists()
         {
-            matchupListbox.DataSource = null;
             matchupListbox.DataSource = selectedMatchups;
             matchupListbox.DisplayMember = "DisplayName";
+            deterList = (MatchupModel)matchupListbox.Items[0];
+            LoadMatchup();
         }
 
         private void LoadRounds()
         {
-            rounds = new List<int>();
+            rounds.Clear();
 
             rounds.Add(1);
 
@@ -73,7 +76,11 @@ namespace TrackerUI
             {
                 if (mathcups.First().MatchupRound == round)
                 {
-                    selectedMatchups = mathcups;
+                    selectedMatchups.Clear();
+                    foreach (MatchupModel m in mathcups)
+                    {
+                        selectedMatchups.Add(m);
+                    }
                 }
             }
 
@@ -84,6 +91,12 @@ namespace TrackerUI
         {
             MatchupModel m = (MatchupModel)matchupListbox.SelectedItem;
 
+
+            if (m == null)
+            {
+                m = deterList;
+            }
+
             for (int i = 0; i < m.Entries.Count; i++)
             {
                 if (i == 0)
@@ -92,6 +105,9 @@ namespace TrackerUI
                     {
                         teamOneName.Text = m.Entries[0].TeamCompeting.TeamName;
                         teamOneScoreValue.Text = m.Entries[0].Score.ToString();
+
+                        teamTwoName.Text = "<bye>";
+                        teamTwoScoreValue.Text = "0";
                     }
                     else
                     {
