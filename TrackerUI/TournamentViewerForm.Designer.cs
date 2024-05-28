@@ -94,6 +94,7 @@
             unplayedCheckbox.TabIndex = 4;
             unplayedCheckbox.Text = "Unplayed Only";
             unplayedCheckbox.UseVisualStyleBackColor = true;
+            unplayedCheckbox.CheckedChanged += unplayedCheckbox_CheckedChanged;
             // 
             // matchupListbox
             // 
@@ -185,6 +186,7 @@
             scoreButton.TabIndex = 13;
             scoreButton.Text = "Score";
             scoreButton.UseVisualStyleBackColor = true;
+            scoreButton.Click += scoreButton_Click;
             // 
             // TournamentViewerForm
             // 
