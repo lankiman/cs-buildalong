@@ -72,6 +72,30 @@ namespace TrackerLibrary
             }
         }
 
+
+        public void updateMatchup(MatchupModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString(db)))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@id", model.Id);
+                parameters.Add("@WinnerId", model.Winner.Id);
+
+                connection.Execute("dbo.spMatchups_Update", parameters, commandType: CommandType.StoredProcedure);
+
+                foreach (MatchupEntryModel me in model.Entries)
+                {
+                    parameters = new DynamicParameters();
+                    parameters.Add("@id", me.Id);
+                    parameters.Add("@TeamCompetingId", me.TeamCompeting.Id);
+                    parameters.Add("@Score", me.Score);
+
+                    connection.Execute("dbo.spMatchupsEntries_Update", parameters,
+                        commandType: CommandType.StoredProcedure);
+                }
+            }
+        }
+
         private void SaveTournament(TournamentModel model, IDbConnection connection)
         {
             var parameters = new DynamicParameters();

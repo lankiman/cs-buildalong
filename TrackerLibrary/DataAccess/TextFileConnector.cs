@@ -84,6 +84,11 @@ namespace TrackerLibrary
             tournaments.SaveToTournamentFile(TournamentFile);
         }
 
+        public void updateMatchup(MatchupModel model)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<PersonModel> GetPerson_All()
         {
             return PeopleFile.FullFilePath().LoadFile().ConverToPersonModels();
