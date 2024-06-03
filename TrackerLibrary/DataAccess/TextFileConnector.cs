@@ -86,7 +86,7 @@ namespace TrackerLibrary
 
         public void updateMatchup(MatchupModel model)
         {
-            throw new NotImplementedException();
+            model.UpdateMatchupToFile();
         }
 
         public List<PersonModel> GetPerson_All()

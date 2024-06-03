@@ -78,19 +78,35 @@ namespace TrackerLibrary
             using (IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString(db)))
             {
                 var parameters = new DynamicParameters();
-                parameters.Add("@id", model.Id);
-                parameters.Add("@WinnerId", model.Winner.Id);
+                if (model.Winner != null)
+                {
+                    parameters.Add("@id", model.Id);
+                    parameters.Add("@WinnerId", model.Winner.Id);
 
-                connection.Execute("dbo.spMatchups_Update", parameters, commandType: CommandType.StoredProcedure);
+                    connection.Execute("dbo.spMatchups_Update", parameters, commandType: CommandType.StoredProcedure);
+                }
 
                 foreach (MatchupEntryModel me in model.Entries)
                 {
-                    parameters = new DynamicParameters();
-                    parameters.Add("@id", me.Id);
-                    parameters.Add("@TeamCompetingId", me.TeamCompeting.Id);
-                    parameters.Add("@Score", me.Score);
+                    if (me.TeamCompeting != null)
+                    {
+                        parameters = new DynamicParameters();
+                        parameters.Add("@id", me.Id);
+                        parameters.Add("@TeamCompetingId", me.TeamCompeting.Id);
+                        parameters.Add("@Score", me.Score);
 
-                    connection.Execute("dbo.spMatchupsEntries_Update", parameters,
+                        connection.Execute("dbo.spMatchupsEntries_Update", parameters,
+                            commandType: CommandType.StoredProcedure);
+                    }
+                }
+
+                if (model.Winner != null)
+                {
+                    parameters = new DynamicParameters();
+                    parameters.Add("@ParentMatchupId", model.Id);
+                    parameters.Add("@WinnerId", model.Winner.Id);
+
+                    connection.Execute("dbo.spMatchupsEntries_UpdateOtherRounds", parameters,
                         commandType: CommandType.StoredProcedure);
                 }
             }
@@ -208,7 +224,7 @@ namespace TrackerLibrary
                     team.TeamMembers = connection.Query<PersonModel>("dbo.spTeamMembers_GetByTeam", parameters,
                         commandType: CommandType.StoredProcedure).ToList();
                 }
-            }"test push"
+            }
 
             return output;
         }
