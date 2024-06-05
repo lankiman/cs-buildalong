@@ -16,17 +16,10 @@ namespace TrackerLibrary
         /// <param name="model"></param>
         /// <returns></returns>
         ///
-        public PrizeModel CreatePrize(PrizeModel model)
+        public void CreatePrize(PrizeModel model)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString(db)))
             {
-                //
-                // @PlaceNumber int,
-                // @PlaceName nvarchar(50),
-                // @PrizeAmount money,
-                //     @PrizePercentage float,
-                // @id int=0 output
-
                 var parameters = new DynamicParameters();
                 parameters.Add("@PlaceNumber", model.PlaceNumber);
                 parameters.Add("@PlaceName", model.PlaceName);
@@ -37,12 +30,10 @@ namespace TrackerLibrary
                 connection.Execute("dbo.spPrizes", parameters, commandType: CommandType.StoredProcedure);
 
                 model.Id = parameters.Get<int>("@id");
-
-                return model;
             }
         }
 
-        public PersonModel CreatePerson(PersonModel model)
+        public void CreatePerson(PersonModel model)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString(db)))
             {
@@ -57,8 +48,6 @@ namespace TrackerLibrary
 
                 model.Id = parameters.Get<int>("@id");
             }
-
-            return model;
         }
 
         public void CreateTournament(TournamentModel model)
@@ -317,7 +306,7 @@ namespace TrackerLibrary
         }
 
 
-        public TeamModel CreateTeam(TeamModel model)
+        public void CreateTeam(TeamModel model)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.ConnectionString(db)))
             {
@@ -338,8 +327,6 @@ namespace TrackerLibrary
                     connection.Execute("dbo.spTeamMembers_Insert", parameters,
                         commandType: CommandType.StoredProcedure);
                 }
-
-                return model;
             }
         }
     }
